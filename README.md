@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a91ff0e5-2c08-4356-9697-7b9730e47a8a/deploy-status)](https://app.netlify.com/sites/ombd-browser/deploys)
+
 # OmdbBrowser
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.4.
