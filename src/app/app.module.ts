@@ -8,10 +8,21 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MovieListComponent } from './movie-list/movie-list.component';
 import { MovieComponent } from './movie-list/movie/movie.component';
+import { MovieSearchComponent } from './movie-search/movie-search.component';
 
 @NgModule({
-  declarations: [AppComponent, MovieListComponent, MovieComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, MatCardModule, MatButtonModule],
+  declarations: [
+    AppComponent,
+    MovieListComponent,
+    MovieComponent,
+    MovieSearchComponent,
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatButtonModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
