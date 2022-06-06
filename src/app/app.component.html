@@ -1,9 +1,4 @@
 <main>
-  <h2>{{ title }}</h2>
-  <app-movie-search></app-movie-search>
-  <app-movie
-    title="Test"
-    year="1234"
-    posterUrl="https://m.media-amazon.com/images/M/MV5BMTcwODc1MTMxM15BMl5BanBnXkFtZTYwMDg1NzY3._V1_SX300.jpg"
-  ></app-movie>
+  <app-movie-search (searchEvent)="emitSearchTerm($event)"></app-movie-search>
+  <app-movie-list [searchTermSubject]="searchTermSubject"></app-movie-list>
 </main>

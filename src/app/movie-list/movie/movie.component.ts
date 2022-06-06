@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Movie } from './movie.model';
 
 @Component({
   selector: 'app-movie',
@@ -29,6 +30,12 @@ export class MovieComponent implements OnInit {
   }
   @Input() set posterUrl(value: string) {
     this._posterUrl = value;
+  }
+
+  @Input() set movie(value: Movie) {
+    this.title = value.Title;
+    this.year = value.Year;
+    this.posterUrl = value.Poster;
   }
 
   constructor() {}

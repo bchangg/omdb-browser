@@ -1,1 +1,3 @@
-<p>movie-list works!</p>
+<section class="movies" *ngFor="let movie of movies">
+  <app-movie [movie]="movie"></app-movie>
+</section>

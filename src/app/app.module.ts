@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { MovieListComponent } from './movie-list/movie-list.component';
 import { MovieComponent } from './movie-list/movie/movie.component';
 import { MovieSearchComponent } from './movie-search/movie-search.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MovieSearchComponent } from './movie-search/movie-search.component';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,9 +1,10 @@
 <mat-form-field appearance="fill">
+  <mat-label>What to watch?</mat-label>
   <input
     matInput
     type="text"
     [(ngModel)]="searchTerm"
-    (keyup)="emitSearchEvent($event)"
+    (keyup)="emitSearchTerm($event)"
   />
   <mat-hint>Press enter to search</mat-hint>
 </mat-form-field>
