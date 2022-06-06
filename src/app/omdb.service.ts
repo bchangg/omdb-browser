@@ -11,10 +11,16 @@ export class OMDBService {
   API_KEY = 'b817d7fd';
   constructor(private httpClient: HttpClient) {}
 
-  async searchByName(name: string): Promise<OMDBResponse> {
+  async searchByName({
+    name,
+    page = 1,
+  }: {
+    name: string;
+    page?: number;
+  }): Promise<OMDBResponse> {
     return firstValueFrom(
       this.httpClient.get(
-        `${this.OMDB_BASE_URL}?apikey=${this.API_KEY}&s=${name}`
+        `${this.OMDB_BASE_URL}?apikey=${this.API_KEY}&s=${name}&page=${page}`
       )
     ) as Promise<OMDBResponse>;
   }
