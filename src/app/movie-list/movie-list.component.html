@@ -2,8 +2,9 @@
   <app-movie [movie]="movie"></app-movie>
 </section>
 
-<mat-paginator *ngIf="movies.length !== 0"
-  [length]="500"
+<mat-paginator
+  *ngIf="movies.length !== 0"
+  [length]="totalSearchResultsLength"
   [pageSize]="10"
   (page)="pageEvent = $event"
 ></mat-paginator>

@@ -16,6 +16,7 @@ export class MovieListComponent implements OnInit {
   private _searchTermSubject: Observable<string> = new Observable<string>();
   private _pageEvent: PageEvent = new PageEvent();
   private _currentSearchTerm: string = '';
+  private _totalSearchResultsLength: number = 0;
 
   get movies() {
     return this._movies;
@@ -52,6 +53,13 @@ export class MovieListComponent implements OnInit {
     this._currentSearchTerm = value;
   }
 
+  get totalSearchResultsLength() {
+    return this._totalSearchResultsLength;
+  }
+  set totalSearchResultsLength(value: number) {
+    this._totalSearchResultsLength = value;
+  }
+
   constructor(private omdb: OMDBService) {}
 
   async ngOnInit(): Promise<void> {
@@ -68,15 +76,18 @@ export class MovieListComponent implements OnInit {
     this.currentSearchTerm = term;
     if (this.currentSearchTerm) {
       try {
-        this.movies = (
-          await this.omdb.searchByName(this.currentSearchTerm)
-        ).Search;
+        const searchResults = await this.omdb.searchByName({
+          name: this.currentSearchTerm,
+        });
+        this.movies = searchResults.Search;
+        this.totalSearchResultsLength = Number(searchResults.totalResults);
       } catch (error) {
         this.movies = [];
         console.error(error);
       }
     } else {
       this.movies = [];
+      this.totalSearchResultsLength = 0;
     }
   }
 }
