@@ -68,16 +68,16 @@ export class MovieListComponent implements OnInit {
   async searchForMovies({ term, page }: { term: string; page?: number }) {
     this.currentSearchTerm = term;
     if (this.currentSearchTerm) {
-      try {
-        const searchResults = await this.omdb.searchByName({
-          name: this.currentSearchTerm,
-          page,
-        });
+      const searchResults = await this.omdb.searchByName({
+        name: this.currentSearchTerm,
+        page,
+      });
+      if (searchResults.Response === 'True') {
         this.movies = searchResults.Search;
         this.totalSearchResultsLength = Number(searchResults.totalResults);
-      } catch (error) {
+      } else {
         this.movies = [];
-        console.error(error);
+        this.totalSearchResultsLength = 0;
       }
     } else {
       this.movies = [];
