@@ -26,7 +26,6 @@ export class MovieSearchComponent implements OnInit {
   emitSearchTerm(event: KeyboardEvent) {
     if (event.key === 'Enter') {
       this.searchEvent.emit(this.searchTerm);
-      this.clearSearchTerm();
     }
   }
 
