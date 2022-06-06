@@ -1,10 +1,11 @@
-<mat-card class="card">
+<mat-card class="movie">
   <mat-card-title-group>
     <mat-card-title>{{ title }}</mat-card-title>
     <mat-card-subtitle>{{ year }}</mat-card-subtitle>
     <img mat-card-lg-image [src]="posterUrl" />
   </mat-card-title-group>
   <mat-card-actions>
-    <button mat-button>CLICK ME</button>
+    <button mat-button (click)="toggleType()">Toggle type visibility</button>
   </mat-card-actions>
+  <mat-card-content class="movie-type" #content>{{ type }}</mat-card-content>
 </mat-card>
