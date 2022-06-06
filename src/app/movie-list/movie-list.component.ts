@@ -43,6 +43,10 @@ export class MovieListComponent implements OnInit {
     );
   }
 
+  ngOnDestroy() {
+    this.searchTermSubscription.unsubscribe();
+  }
+
   async searchForMovies(term: string) {
     try {
       this.movies = (await this.omdb.searchByName(term)).Search;
