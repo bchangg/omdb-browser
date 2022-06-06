@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-movie-search',
@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MovieSearchComponent implements OnInit {
   private _searchTerm: string = '';
+  private _searchEvent: EventEmitter<string> = new EventEmitter<string>();
 
   get searchTerm() {
     return this._searchTerm;
@@ -14,11 +15,22 @@ export class MovieSearchComponent implements OnInit {
   set searchTerm(value: string) {
     this._searchTerm = value;
   }
+
+  @Output() get searchEvent() {
+    return this._searchEvent;
+  }
   constructor() {}
 
   ngOnInit(): void {}
 
-  emitSearchEvent(event: KeyboardEvent) {
-    // TODO: if event is "enter", emit search term to parent then pass to list to perform search
+  emitSearchTerm(event: KeyboardEvent) {
+    if (event.key === 'Enter') {
+      this.searchEvent.emit(this.searchTerm);
+      this.clearSearchTerm();
+    }
+  }
+
+  clearSearchTerm() {
+    this.searchTerm = '';
   }
 }

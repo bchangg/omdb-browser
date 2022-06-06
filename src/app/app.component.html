@@ -1,4 +1,4 @@
 <main>
-  <app-movie-search></app-movie-search>
-  <app-movie-list></app-movie-list>
+  <app-movie-search (searchEvent)="emitSearchTerm($event)"></app-movie-search>
+  <app-movie-list [searchTermSubject]="searchTermSubject"></app-movie-list>
 </main>
