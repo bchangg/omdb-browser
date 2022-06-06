@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { OMDBResponse } from '../omdb.model';
 import { OMDBService } from '../omdb.service';
@@ -13,6 +14,8 @@ export class MovieListComponent implements OnInit {
   private _movies: Array<Movie> = [];
   private _searchTermSubscription: Subscription = new Subscription();
   private _searchTermSubject: Observable<string> = new Observable<string>();
+  private _pageEvent: PageEvent = new PageEvent();
+  private _currentSearchTerm: string = '';
 
   get movies() {
     return this._movies;
@@ -35,6 +38,20 @@ export class MovieListComponent implements OnInit {
     this._searchTermSubject = value;
   }
 
+  get pageEvent() {
+    return this._pageEvent;
+  }
+  set pageEvent(value: PageEvent) {
+    this._pageEvent = value;
+  }
+
+  get currentSearchTerm() {
+    return this._currentSearchTerm;
+  }
+  set currentSearchTerm(value: string) {
+    this._currentSearchTerm = value;
+  }
+
   constructor(private omdb: OMDBService) {}
 
   async ngOnInit(): Promise<void> {
@@ -48,11 +65,18 @@ export class MovieListComponent implements OnInit {
   }
 
   async searchForMovies(term: string) {
-    try {
-      this.movies = (await this.omdb.searchByName(term)).Search;
-    } catch (error) {
+    this.currentSearchTerm = term;
+    if (this.currentSearchTerm) {
+      try {
+        this.movies = (
+          await this.omdb.searchByName(this.currentSearchTerm)
+        ).Search;
+      } catch (error) {
+        this.movies = [];
+        console.error(error);
+      }
+    } else {
       this.movies = [];
-      console.error(error);
     }
   }
 }

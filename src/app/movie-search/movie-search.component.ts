@@ -31,5 +31,6 @@ export class MovieSearchComponent implements OnInit {
 
   clearSearchTerm() {
     this.searchTerm = '';
+    this.searchEvent.emit(this.searchTerm);
   }
 }
