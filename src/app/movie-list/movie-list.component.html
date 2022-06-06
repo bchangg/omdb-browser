@@ -6,5 +6,5 @@
   *ngIf="movies.length !== 0"
   [length]="totalSearchResultsLength"
   [pageSize]="10"
-  (page)="pageEvent = $event"
+  (page)="updateSearchResults($event)"
 ></mat-paginator>

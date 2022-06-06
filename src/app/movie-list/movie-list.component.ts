@@ -39,13 +39,6 @@ export class MovieListComponent implements OnInit {
     this._searchTermSubject = value;
   }
 
-  get pageEvent() {
-    return this._pageEvent;
-  }
-  set pageEvent(value: PageEvent) {
-    this._pageEvent = value;
-  }
-
   get currentSearchTerm() {
     return this._currentSearchTerm;
   }
@@ -64,7 +57,7 @@ export class MovieListComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.searchTermSubscription = this.searchTermSubject.subscribe(
-      (searchTerm) => this.searchForMovies(searchTerm)
+      (searchTerm) => this.searchForMovies({ term: searchTerm })
     );
   }
 
@@ -72,12 +65,13 @@ export class MovieListComponent implements OnInit {
     this.searchTermSubscription.unsubscribe();
   }
 
-  async searchForMovies(term: string) {
+  async searchForMovies({ term, page }: { term: string; page?: number }) {
     this.currentSearchTerm = term;
     if (this.currentSearchTerm) {
       try {
         const searchResults = await this.omdb.searchByName({
           name: this.currentSearchTerm,
+          page,
         });
         this.movies = searchResults.Search;
         this.totalSearchResultsLength = Number(searchResults.totalResults);
@@ -89,5 +83,12 @@ export class MovieListComponent implements OnInit {
       this.movies = [];
       this.totalSearchResultsLength = 0;
     }
+  }
+
+  updateSearchResults(value: PageEvent) {
+    this.searchForMovies({
+      term: this.currentSearchTerm,
+      page: value.pageIndex + 1,
+    });
   }
 }
